@@ -1,0 +1,82 @@
+{% extends 'layout.html' %} {% block title %} Flights Board {% endblock title %}
+{% block content %}
+<div class="card" style="margin-top: 60px;">
+  <div class="card-body">
+    <h3>Book a Flight</h3>
+    <form action="{{ url_for('book') }}" method="POST">
+      <div class="form-group">
+        <select class="form-control" name="flight_id">
+          {% for flight in flights %}
+          <option value="{{flight.id}}">
+            {{flight.origin}} to {{ flight.destination }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          placeholder="Passenger name..."
+        />
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-success">Book Flight</button>
+      </div>
+    </form>
+  </div>
+</div>
+<hr />
+<div class="card">
+  <div class="card-body">
+    <p>
+      <button
+        class="btn btn-success"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapseExample"
+        aria-expanded="false"
+        aria-controls="collapseExample"
+      >
+        Show Flights Details
+      </button>
+    </p>
+  </div>
+</div>
+<div class="collapse" id="collapseExample">
+  <table class="table table-sm" style="text-align: center;">
+    <thead>
+      <tr>
+        <th scope="col">Flight nº</th>
+        <th scope="col">Origin</th>
+        <th scope="col">Destination</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for flight in flights %}
+      <tr>
+        <td>
+          {{flight.id}}
+        </td>
+        <td>{{flight.origin}}</td>
+        <td>{{flight.destination}}</td>
+        <td>{{flight.duration}}</td>
+        <td>
+          <a
+            class="btn btn-sm btn-warning"
+            href="{{url_for('flight', flight_id=flight.id)}}"
+          >
+            See Flight Details
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

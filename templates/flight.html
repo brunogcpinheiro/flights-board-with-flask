@@ -1,0 +1,28 @@
+{% extends 'layout.html' %} {% block title %} Flight Detail {% endblock title %}
+{% block content %}
+<div class="card" style="margin-top: 60px;">
+  <div class="card-body">
+    <h2>Details of flight: {{flight.id}}</h2>
+    <p>Origin: {{flight.origin}}</p>
+    <p>Destination: {{flight.destination}}</p>
+    <p>Duration: {{flight.duration}}</p>
+    <hr />
+    <h3>List of passengers:</h3>
+    <ol>
+      {% if passengers|length == 0 %}
+      <p>No passengers.</p>
+      {% else %} {% for passenger in passengers %}
+      <li>{{passenger.name}}</li>
+      {% endfor %} {% endif %}
+    </ol>
+  </div>
+</div>
+
+<a
+  style="margin-top: 30px;"
+  class="btn btn-lg btn-secondary"
+  href="{{url_for('index')}}"
+>
+  Back to Home...
+</a>
+{% endblock content %}
