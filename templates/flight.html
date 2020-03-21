@@ -9,11 +9,12 @@
     <hr />
     <h3>List of passengers:</h3>
     <ol>
-      {% if passengers|length == 0 %}
+      {% for passenger in passengers %}
+      <li>{{ passenger.name }}</li>
+      {% else %}
+      <br />
       <p>No passengers.</p>
-      {% else %} {% for passenger in passengers %}
-      <li>{{passenger.name}}</li>
-      {% endfor %} {% endif %}
+      {% endfor %}
     </ol>
   </div>
 </div>
